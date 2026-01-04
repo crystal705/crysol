@@ -4,6 +4,7 @@ import { useState, FormEvent } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import AnimatedSection from '../components/AnimatedSection';
+import WhatsAppButton from '../components/WhatsAppButton';
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -311,6 +312,7 @@ export default function RegisterPage() {
       </section>
 
       <Footer />
+      <WhatsAppButton />
     </main>
   );
 }

@@ -38,56 +38,50 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a 
-            href="/" 
-            onClick={handleScrollToTop}
+          <Link 
+            href="/"
             className="text-2xl font-extrabold bg-gradient-to-r from-primary-600 via-primary-500 to-accent-500 bg-clip-text text-transparent hover:from-primary-700 hover:via-primary-600 hover:to-accent-600 transition-all duration-300 transform hover:scale-105 cursor-pointer"
           >
             Crysol Academy
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a 
-              href="/" 
-              onClick={handleScrollToTop}
-              className="text-text-secondary hover:text-primary-600 transition-all duration-300 font-semibold text-sm relative group cursor-pointer"
+            <Link 
+              href="/"
+              className="text-text-secondary hover:text-primary-600 transition-all duration-300 font-semibold text-sm relative group"
             >
               Home
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-600 to-accent-500 group-hover:w-full transition-all duration-300"></span>
-            </a>
-            <a 
-              href="#courses" 
-              onClick={(e) => handleAnchorClick(e, '#courses')}
-              className="text-text-secondary hover:text-primary-600 transition-all duration-300 font-semibold text-sm cursor-pointer relative group"
+            </Link>
+            <Link 
+              href="/course"
+              className="text-text-secondary hover:text-primary-600 transition-all duration-300 font-semibold text-sm relative group"
             >
               Courses
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-600 to-accent-500 group-hover:w-full transition-all duration-300"></span>
-            </a>
-            <a 
-              href="#about" 
-              onClick={(e) => handleAnchorClick(e, '#about')}
-              className="text-text-secondary hover:text-primary-600 transition-all duration-300 font-semibold text-sm cursor-pointer relative group"
+            </Link>
+            <Link 
+              href="/about"
+              className="text-text-secondary hover:text-primary-600 transition-all duration-300 font-semibold text-sm relative group"
             >
               About Us
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-600 to-accent-500 group-hover:w-full transition-all duration-300"></span>
-            </a>
-            <a 
-              href="#reviews" 
-              onClick={(e) => handleAnchorClick(e, '#reviews')}
-              className="text-text-secondary hover:text-primary-600 transition-all duration-300 font-semibold text-sm cursor-pointer relative group"
+            </Link>
+            <Link 
+              href="/review"
+              className="text-text-secondary hover:text-primary-600 transition-all duration-300 font-semibold text-sm relative group"
             >
-              Reviews
+              Review
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-600 to-accent-500 group-hover:w-full transition-all duration-300"></span>
-            </a>
-            <a 
-              href="#contact" 
-              onClick={(e) => handleAnchorClick(e, '#contact')}
-              className="text-text-secondary hover:text-primary-600 transition-all duration-300 font-semibold text-sm cursor-pointer relative group"
+            </Link>
+            <Link 
+              href="/contact"
+              className="text-text-secondary hover:text-primary-600 transition-all duration-300 font-semibold text-sm relative group"
             >
               Contact Us
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-600 to-accent-500 group-hover:w-full transition-all duration-300"></span>
-            </a>
+            </Link>
           </div>
 
           {/* CTA Button */}
@@ -130,12 +124,12 @@ export default function Navbar() {
           <div className="md:hidden border-t border-gray-100 overflow-hidden">
             <div className="min-h-[70vh] flex flex-col items-center justify-center py-12 space-y-6">
               {[
-                { href: "/", label: "Home", onClick: handleScrollToTop, isButton: false },
-                { href: "#courses", label: "Courses", onClick: (e: React.MouseEvent<HTMLAnchorElement>) => handleAnchorClick(e, '#courses'), isButton: false },
-                { href: "#about", label: "About Us", onClick: (e: React.MouseEvent<HTMLAnchorElement>) => handleAnchorClick(e, '#about'), isButton: false },
-                { href: "#reviews", label: "Reviews", onClick: (e: React.MouseEvent<HTMLAnchorElement>) => handleAnchorClick(e, '#reviews'), isButton: false },
-                { href: "#contact", label: "Contact Us", onClick: (e: React.MouseEvent<HTMLAnchorElement>) => handleAnchorClick(e, '#contact'), isButton: false },
-                { href: "/register", label: "Registration", onClick: () => setIsMenuOpen(false), isButton: true }
+                { href: "/", label: "Home", onClick: handleScrollToTop, isButton: false, isLink: true },
+                { href: "/course", label: "Courses", onClick: () => setIsMenuOpen(false), isButton: false, isLink: true },
+                { href: "/about", label: "About Us", onClick: () => setIsMenuOpen(false), isButton: false, isLink: true },
+                { href: "/review", label: "Review", onClick: () => setIsMenuOpen(false), isButton: false, isLink: true },
+                { href: "/contact", label: "Contact Us", onClick: () => setIsMenuOpen(false), isButton: false, isLink: true },
+                { href: "/register", label: "Registration", onClick: () => setIsMenuOpen(false), isButton: true, isLink: true }
               ].map((item, index) => (
                 <div
                   key={index}
@@ -153,6 +147,14 @@ export default function Navbar() {
                     >
                       <span className="relative z-10">{item.label}</span>
                       <div className="absolute inset-0 bg-gradient-to-r from-primary-700 to-primary-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </Link>
+                  ) : item.isLink ? (
+                    <Link
+                      href={item.href}
+                      onClick={item.onClick as () => void}
+                      className="block text-lg font-semibold text-text-secondary hover:text-primary-600 transition-all duration-300 cursor-pointer py-2 px-4 rounded-lg hover:bg-primary-50 min-w-[150px] text-center"
+                    >
+                      {item.label}
                     </Link>
                   ) : (
                     <a
